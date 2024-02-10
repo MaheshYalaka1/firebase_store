@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:realtime_database_1/data/catogiries.dart';
-import 'package:realtime_database_1/modals/category.dart';
 import 'package:realtime_database_1/modals/grocery_item.dart';
+import 'package:realtime_database_1/widgets/Update_item.dart';
 import 'package:realtime_database_1/widgets/new_item.dart';
 import 'package:http/http.dart' as http;
 
@@ -104,6 +104,14 @@ class _GroceryList extends State<GroceryList> {
     }
   }
 
+  void _showItemDetails(GroceryItem item) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ItemDetailsPage(item: item),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget content = const Center(
@@ -130,6 +138,9 @@ class _GroceryList extends State<GroceryList> {
               color: _groceryItem[index].category.color,
             ),
             trailing: Text(_groceryItem[index].quantity.toString()),
+            onTap: () {
+              _showItemDetails(_groceryItem[index]);
+            },
           ),
         ),
       );
